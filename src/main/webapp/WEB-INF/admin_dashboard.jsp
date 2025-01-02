@@ -159,16 +159,6 @@
 													<div class="card-body">
 														<div class="d-flex justify-content-between">
 															<h6 class="card-title">${jobApplication.title}</h6>
-															<div>
-																<a
-																	href="/alumni/dashboard/jobApplication/edit/${jobApplication.id}"
-																	class="btn btn-sm btn-primary me-2">Edit</a>
-																<form
-																	action="/alumni/dashboard/jobApplication/delete/${jobApplication.id}"
-																	method="post">
-																	<button type="submit" class="btn btn-danger btn-sm">Delete</button>
-																</form>
-															</div>
 														</div>
 														<p class="card-text">${jobApplication.organization}</p>
 														<p class="card-text">${jobApplication.notes}</p>
