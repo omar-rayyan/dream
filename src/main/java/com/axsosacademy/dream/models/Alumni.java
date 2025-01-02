@@ -21,7 +21,7 @@ public class Alumni extends User {
     @OneToMany(mappedBy="owner", fetch=FetchType.LAZY)
 	private List<Task> tasks;
 
-    public Alumni(String email, String password, String firstName, String lastName, String confirm) {
-        super(email, password, firstName, lastName, confirm);
+    public Alumni(String email, String password, String firstName, String lastName) {
+        super(email, password, firstName, lastName);
     }
 }

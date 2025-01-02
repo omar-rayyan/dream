@@ -33,10 +33,6 @@ public abstract class User {
     @Size(min = 8, max = 128, message = "Password must be between 8 and 128 characters.")
     private String password;
 
-    @Transient
-    @NotEmpty(message = "Password confirmation is required.")
-    private String confirm;
-
     @Column(updatable = false)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date createdAt;
@@ -57,12 +53,11 @@ public abstract class User {
     public User() {
     }
 
-    public User(String email, String password, String firstName, String lastName, String confirm) {
+    public User(String email, String password, String firstName, String lastName) {
         this.email = email;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.confirm = confirm;
     }
 
     public Long getId() {
@@ -76,11 +71,7 @@ public abstract class User {
     public String getPassword() {
         return password;
     }
-
-    public String getConfirm() {
-        return confirm;
-    }
-
+    
     public Date getCreatedAt() {
         return createdAt;
     }
@@ -96,11 +87,7 @@ public abstract class User {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    public void setConfirm(String confirm) {
-        this.confirm = confirm;
-    }
-
+    
 	public String getFirstName() {
 		return firstName;
 	}

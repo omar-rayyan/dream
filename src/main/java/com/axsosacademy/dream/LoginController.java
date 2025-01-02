@@ -48,20 +48,6 @@ public class LoginController {
         return "redirect:/";
     }
 
-    @PostMapping("/register")
-    public String register(@Valid @ModelAttribute("newUser") User newUser, BindingResult bindingResult,
-            Model model, HttpSession session) {
-        User loggedUser = userService.register(newUser, bindingResult);
-
-        if (bindingResult.hasErrors()) {
-            model.addAttribute("newLogin", new LoginUser());
-            return "index.jsp";
-        }
-
-        session.setAttribute("loggedUser", loggedUser);
-        return "redirect:/home";
-    }
-
     @PostMapping("/login")
     public String login(@Valid @ModelAttribute("newLogin") LoginUser newLogin, BindingResult bindingResult,
             HttpSession session, Model model) {

@@ -1,8 +1,14 @@
 package com.axsosacademy.dream.services;
 
+import com.axsosacademy.dream.models.Admin;
+import com.axsosacademy.dream.models.Alumni;
 import com.axsosacademy.dream.models.LoginUser;
+import com.axsosacademy.dream.models.RegistrationForm;
 import com.axsosacademy.dream.models.User;
+import com.axsosacademy.dream.repositories.AdminRepository;
+import com.axsosacademy.dream.repositories.AlumniRepository;
 import com.axsosacademy.dream.repositories.UserRepository;
+
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
@@ -12,9 +18,22 @@ import java.util.Optional;
 @Service
 public class UserService {
     private final UserRepository userRepository;
+    private final AlumniRepository alumniRepository;
+    private final AdminRepository adminRepository;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, AlumniRepository alumniRepository, AdminRepository adminRepository) {
         this.userRepository = userRepository;
+        this.adminRepository = adminRepository;
+        this.alumniRepository = alumniRepository;
+    }
+    
+    public User findById(Long id) {
+    	Optional<User> optionalUser = userRepository.findById(id);
+        if(optionalUser.isPresent()) {
+            return optionalUser.get();
+        } else {
+            return null;
+        }
     }
 
     /**
@@ -23,17 +42,44 @@ public class UserService {
      * @param bindingResult Validation container for errors.
      * @return The saved user or null if validation fails.
      */
-    public User register(User newUser, BindingResult bindingResult) {
-        validateRegistration(newUser, bindingResult);
+    public User register(RegistrationForm registrationForm, BindingResult bindingResult) {
+        validateRegistration(registrationForm, bindingResult);
 
         if (bindingResult.hasErrors()) {
             return null;
         }
 
-        String hashedPassword = BCrypt.hashpw(newUser.getPassword(), BCrypt.gensalt());
+        User newUser;
+        switch (registrationForm.getAccountType()) {
+            case "Alumni":
+                newUser = new Alumni();
+                break;
+            case "Admin":
+                newUser = new Admin();
+                break;
+            default:
+                return null;
+        }
+        
+        newUser.setFirstName(registrationForm.getFirstName());
+        newUser.setLastName(registrationForm.getLastName());
+        newUser.setEmail(registrationForm.getEmail());
+
+        String hashedPassword = BCrypt.hashpw(registrationForm.getPassword(), BCrypt.gensalt());
         newUser.setPassword(hashedPassword);
 
         return userRepository.save(newUser);
+    }
+    
+    public void validateRegistration(RegistrationForm registrationForm, BindingResult bindingResult) {
+        Optional<User> existingUser = userRepository.findByEmail(registrationForm.getEmail());
+        if (existingUser.isPresent()) {
+            bindingResult.rejectValue("email", "EmailExists", "This email is already registered.");
+        }
+
+        if (!registrationForm.isPasswordMatch()) {
+            bindingResult.rejectValue("confirm", "Matches", "Passwords do not match.");
+        }
     }
 
     /**
@@ -62,20 +108,40 @@ public class UserService {
 
         return user;
     }
-
-    /**
-     * Validates registration input.
-     * @param newUser The user object to validate.
-     * @param bindingResult Validation container for errors.
-     */
-    private void validateRegistration(User newUser, BindingResult bindingResult) {
-        Optional<User> existingUser = userRepository.findByEmail(newUser.getEmail());
-        if (existingUser.isPresent()) {
-            bindingResult.rejectValue("email", "EmailExists", "This email is already registered.");
+    
+    public boolean checkPassword(Long userId, String currentPassword) {
+        Optional<User> optionalUser = userRepository.findById(userId);
+        if (optionalUser.isEmpty()) {
+            return false;
         }
 
-        if (!newUser.getPassword().equals(newUser.getConfirm())) {
-            bindingResult.rejectValue("confirm", "Matches", "Passwords do not match.");
+        User user = optionalUser.get();
+        return BCrypt.checkpw(currentPassword, user.getPassword());
+    }
+
+    public void updateUserProfile(User user) {
+        Optional<User> existingUser = userRepository.findById(user.getId());
+        if (existingUser.isPresent()) {
+            User currentUser = existingUser.get();
+            currentUser.setFirstName(user.getFirstName());
+            currentUser.setLastName(user.getLastName());
+            currentUser.setEmail(user.getEmail());
+            
+            if (currentUser instanceof Alumni) {
+                alumniRepository.save((Alumni) currentUser);
+            } else if (currentUser instanceof Admin) {
+                adminRepository.save((Admin) currentUser);
+            }
+        }
+    }
+    
+    public void updatePassword(Long userId, String newPassword) {
+        Optional<User> userOpt = userRepository.findById(userId);
+        if (userOpt.isPresent()) {
+            User user = userOpt.get();
+            String hashedPassword = BCrypt.hashpw(newPassword, BCrypt.gensalt());
+            user.setPassword(hashedPassword);
+            userRepository.save(user);
         }
     }
 }

@@ -12,14 +12,12 @@ public class Task {
 	 @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @NotEmpty(message = "Task title is required.")
-    @Size(min = 3, max = 40, message = "Task title must be between 3 and 40 characters.")
-    private String title;
     
     @NotEmpty(message = "Task description is required.")
     @Size(min = 1, max = 30, message = "Task description required.")
     private String description;
+    
+    private boolean completed = false;
     
     @ManyToOne(fetch= FetchType.LAZY)
     @JoinColumn(name="alumni_id")
@@ -50,8 +48,7 @@ public class Task {
     public Task() {}
     
 
-	public Task(String title, String description, Admin author, Alumni owner) {
-		this.title = title;
+	public Task(String description, Admin author, Alumni owner) {
 		this.description = description;
 		this.author = author;
 		this.owner = owner;
@@ -74,14 +71,6 @@ public class Task {
 		return updatedAt;
 	}
 
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
 	public String getDescription() {
 		return description;
 	}
@@ -100,6 +89,14 @@ public class Task {
 
 	public Admin getAuthor() {
 		return author;
+	}
+
+	public boolean isCompleted() {
+		return completed;
+	}
+
+	public void setCompleted(boolean completed) {
+		this.completed = completed;
 	}
 
 	public void setAuthor(Admin author) {
