@@ -106,56 +106,45 @@
 				</div>
 
 				<div class="d-flex justify-content-between">
-					<table class="table table-bordered">
-						<thead>
-							<tr>
-								<th>Applied</th>
-							</tr>
-						</thead>
-						<tbody>
-							<!-- Add your dynamic content here -->
-						</tbody>
-					</table>
-					<table class="table table-bordered">
-						<thead>
-							<tr>
-								<th>Interviewed</th>
-							</tr>
-						</thead>
-						<tbody>
-							<!-- Add your dynamic content here -->
-						</tbody>
-					</table>
-					<table class="table table-bordered">
-						<thead>
-							<tr>
-								<th>Offer</th>
-							</tr>
-						</thead>
-						<tbody>
-							<!-- Add your dynamic content here -->
-						</tbody>
-					</table>
-					<table class="table table-bordered">
-						<thead>
-							<tr>
-								<th>Accepted</th>
-							</tr>
-						</thead>
-						<tbody>
-							<!-- Add your dynamic content here -->
-						</tbody>
-					</table>
-					<table class="table table-bordered">
-						<thead>
-							<tr>
-								<th>Rejected</th>
-							</tr>
-						</thead>
-						<tbody>
-							<!-- Add your dynamic content here -->
-						</tbody>
-					</table>
+					<c:forEach var="status"
+						items="Applied,Interviewed,Offer,Accepted,Rejected">
+						<table class="job-table table table-bordered">
+							<thead>
+								<tr>
+									<th>${status}</th>
+								</tr>
+							</thead>
+							<tbody class="sortable" data-status="${status}">
+								<c:forEach var="jobApplication" items="${alumniJobApplications}">
+									<c:if test="${jobApplication.status.equals(status)}">
+										<tr>
+											<td>
+												<div class="card mb-3 draggable-card"
+													data-id="${jobApplication.getStringId()}">
+													<div class="card-body">
+														<div class="d-flex justify-content-between">
+															<h6 class="card-title">${jobApplication.title}</h6>
+															<div>
+																<a
+																	href="/alumni/dashboard/jobApplication/edit/${jobApplication.id}"
+																	class="btn btn-sm btn-primary me-2">Edit</a>
+																<form action="/alumni/dashboard/jobApplication/delete/${jobApplication.id}"
+																	method="post">
+																	<button type="submit" class="btn btn-danger btn-sm">Delete</button>
+																</form>
+															</div>
+														</div>
+														<p class="card-text">${jobApplication.organization}</p>
+														<p class="card-text">${jobApplication.notes}</p>
+													</div>
+												</div>
+											</td>
+										</tr>
+									</c:if>
+								</c:forEach>
+							</tbody>
+						</table>
+					</c:forEach>
 				</div>
 			</div>
 

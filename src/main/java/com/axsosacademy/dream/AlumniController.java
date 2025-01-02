@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import com.axsosacademy.dream.models.Admin;
 import com.axsosacademy.dream.models.Alumni;
 import com.axsosacademy.dream.models.JobApplication;
 import com.axsosacademy.dream.models.Task;

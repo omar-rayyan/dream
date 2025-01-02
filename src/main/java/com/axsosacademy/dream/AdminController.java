@@ -20,6 +20,7 @@ import com.axsosacademy.dream.models.User;
 import com.axsosacademy.dream.models.UserProfileUpdateDTO;
 import com.axsosacademy.dream.services.AdminService;
 import com.axsosacademy.dream.services.AlumniService;
+import com.axsosacademy.dream.services.JobApplicationService;
 import com.axsosacademy.dream.services.TaskService;
 import com.axsosacademy.dream.services.UserService;
 
@@ -39,6 +40,9 @@ public class AdminController {
 	
 	@Autowired
 	AdminService adminService;
+	
+	@Autowired
+	JobApplicationService jobApplicationService;
 	
     @GetMapping("/admin/dashboard")
     public String adminDashboard(HttpSession session, Model model) {
@@ -207,6 +211,7 @@ public class AdminController {
     	model.addAttribute("alumnis", alumniService.findAll());
     	model.addAttribute("selectedAlumni", alumniService.findById(id));
     	model.addAttribute("selectedAlumniTasks", taskService.findRecentAlumniTasks(id));
+    	model.addAttribute("alumniJobApplications", jobApplicationService.findAlumniJobApplications(id));
         return "admin_dashboard.jsp";
     }
     
