@@ -16,7 +16,7 @@ public class Alumni extends User {
     }
     
     @OneToMany(mappedBy="owner", fetch=FetchType.LAZY)
-	private List<JobApplication> job_applications;
+	private List<JobApplication> jobApplications;
     
     @OneToMany(mappedBy="owner", fetch=FetchType.LAZY)
 	private List<Task> tasks;
@@ -24,4 +24,20 @@ public class Alumni extends User {
     public Alumni(String email, String password, String firstName, String lastName) {
         super(email, password, firstName, lastName);
     }
+
+	public List<JobApplication> getJobApplications() {
+		return jobApplications;
+	}
+
+	public void setJobApplications(List<JobApplication> jobApplications) {
+		this.jobApplications = jobApplications;
+	}
+
+	public List<Task> getTasks() {
+		return tasks;
+	}
+
+	public void setTasks(List<Task> tasks) {
+		this.tasks = tasks;
+	}
 }

@@ -71,6 +71,10 @@ public class JobApplication {
 	public String getTitle() {
 		return title;
 	}
+	
+	public String getStringId() {
+		return id.toString();
+	}
 
 	public void setTitle(String title) {
 		this.title = title;

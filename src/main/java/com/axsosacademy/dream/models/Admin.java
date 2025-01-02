@@ -21,4 +21,12 @@ public class Admin extends User {
     public Admin(String email, String password, String first_name, String last_name) {
         super(email, password, first_name, last_name);
     }
+
+	public List<Task> getAuthoredTasks() {
+		return authoredTasks;
+	}
+
+	public void setAuthoredTasks(List<Task> authoredTasks) {
+		this.authoredTasks = authoredTasks;
+	}
 }
