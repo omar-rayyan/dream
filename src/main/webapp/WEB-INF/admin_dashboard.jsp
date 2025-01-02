@@ -12,7 +12,43 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin Dashboard | DreamTracker</title>
 <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css">
+<link
+	href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
+	rel="stylesheet" />
+<link
+	href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css"
+	rel="stylesheet" />
 </head>
+<style>
+.select2-container--bootstrap-5 {
+    width: 100% !important;
+}
+
+.select2--large {
+    padding-top: .5rem !important;
+    padding-bottom: .5rem !important;
+}
+
+.select2-container--bootstrap-5 .select2-selection {
+    min-height: 40px;
+    border: 1px solid #dee2e6;
+}
+
+.select2-container--bootstrap-5 .select2-selection--single {
+    padding: 0.375rem 0.75rem;
+}
+
+.select2-container--bootstrap-5 .select2-dropdown {
+    border-color: #dee2e6;
+    border-radius: 0.375rem;
+}
+
+.select2-container--bootstrap-5 .select2-search__field {
+    padding: 0.5rem;
+    border: 1px solid #dee2e6;
+    border-radius: 0.375rem;
+}
+</style>
 <body class="m-4">
 	<div class="container-fluid">
 		<div class="row">
@@ -86,14 +122,13 @@
 						</div>
 					</div>
 
-					<select id="alumniDropdown" class="form-select" name="alumniId"
-						onchange="location.href='/admin/dashboard/alumnis/' + this.value">
+					<select id="alumniDropdown" class="form-select select2"
+						name="alumniId" style="width: 100%;">
 						<c:if test="${selectedAlumni == null}">
-							<option value="" disabled selected>Select Alumni...</option>
+							<option value="" disabled selected>Search Alumni...</option>
 						</c:if>
 						<c:if test="${selectedAlumni != null}">
-							<option value="${selectedAlumni.id}" disabled selected>${selectedAlumni.firstName}
-								${selectedAlumni.lastName}</option>
+							<option value="${selectedAlumni.id}" selected>${selectedAlumni.getFullName()}</option>
 						</c:if>
 						<c:forEach var="alumni" items="${alumnis}">
 							<c:if
@@ -128,7 +163,8 @@
 																<a
 																	href="/alumni/dashboard/jobApplication/edit/${jobApplication.id}"
 																	class="btn btn-sm btn-primary me-2">Edit</a>
-																<form action="/alumni/dashboard/jobApplication/delete/${jobApplication.id}"
+																<form
+																	action="/alumni/dashboard/jobApplication/delete/${jobApplication.id}"
 																	method="post">
 																	<button type="submit" class="btn btn-danger btn-sm">Delete</button>
 																</form>
@@ -180,5 +216,30 @@
 
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+<script>
+$(document).ready(function() {
+    $('.select2').select2({
+        theme: 'bootstrap-5',
+        placeholder: 'Search Alumni...',
+        allowClear: true,
+        width: '100%',
+        selectionCssClass: 'select2--large',
+        dropdownCssClass: 'select2--large',
+        containerCssClass: 'select2-container--bootstrap-5',
+    });
+
+    // Handle the change event
+    $('#alumniDropdown').on('change', function() {
+        const selectedValue = $(this).val();
+        if (selectedValue) {
+            window.location.href = '/admin/dashboard/alumnis/' + selectedValue;
+        }
+    });
+});
+</script>
 </body>
 </html>

@@ -40,4 +40,5 @@ public class Alumni extends User {
 	public void setTasks(List<Task> tasks) {
 		this.tasks = tasks;
 	}
+
 }

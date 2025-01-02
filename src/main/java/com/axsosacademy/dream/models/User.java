@@ -104,5 +104,11 @@ public abstract class User {
 		this.lastName = lastName;
 	}
     
-    
+	public String getFullName() {
+	    StringBuilder fullName = new StringBuilder();
+	    fullName.append(firstName);
+	    fullName.append(" ");
+	    fullName.append(lastName);
+	    return fullName.toString();
+	}
 }
