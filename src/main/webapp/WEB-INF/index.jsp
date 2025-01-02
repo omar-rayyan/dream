@@ -73,9 +73,6 @@ body {
 					<form:errors path="password" cssClass="text-danger" />
 				</div>
 				<button type="submit" class="btn btn-primary w-100">Sign In</button>
-				<div class="mt-3 text-center">
-					<a href="#" class="forgot-password">Forgot password?</a>
-				</div>
 			</form:form>
 		</div>
 	</div>
