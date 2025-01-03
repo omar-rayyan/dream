@@ -219,7 +219,7 @@
             <div class="row">
                 <!-- Left Side: Add Task Form -->
                 <div class="col -md-3 border-end">
-                    <h3 class="text-center">Add a Task</h3>
+                    <h3 class="text-center"><strong>Add a Task</strong></h3>
                     <c:if test="${selectedAlumni == null}">
                         <div class="alert alert-info">Select an Alumni to display and manage their tasks.</div>
                     </c:if>
@@ -237,7 +237,7 @@
                     </form>
                     <!-- Tasks Section -->
                     <div class="mt-4">
-                        <h3 class="text-center">Tasks</h3>
+                        <h3 class="text-center"><strong>Tasks</strong></h3>
                         <c:forEach var="task" items="${selectedAlumniTasks}">
                             <div class="card mb-3">
     <div class="card-body d-flex justify-content-between align-items-center">
@@ -353,28 +353,50 @@
 
                 <!-- Right Side: Profile Card -->
                 <div class="col-md-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Alumni Profile</h5>
-                            <c:if test="${selectedAlumni != null}">
-                                <p class="card-text">
-                                    <strong>First Name:</strong> ${selectedAlumni.firstName}<br>
-                                    <strong>Last Name:</strong> ${selectedAlumni.lastName}<br>
-                                    <strong>Email:</strong> ${selectedAlumni.email}<br>
-                                </p>
-                                <div class="d-flex justify-content-between">
-                                    <a href="/admin/dashboard/alumnis/edit/${selectedAlumni.id}" class="btn btn-primary">Edit Profile</a>
-                                    <form:form action="/admin/dashboard/${selectedAlumni.id}/delete" method="post">
-                                        <button type="submit" class="btn btn-secondary">Delete</button>
-                                    </form:form>
-                                </div>
-                            </c:if>
-                            <c:if test="${selectedAlumni == null}">
-                                <div class="alert alert-info">Select an Alumni to display their profile.</div>
-                            </c:if>
-                        </div>
+    <div class="card">
+        <div class="card-body">
+            <!-- Header with action buttons -->
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h5 class="card-title mb-0"><strong>Alumni Profile</strong></h5>
+                <c:if test="${selectedAlumni != null}">
+                    <div class="d-flex align-items-center">
+                        <!-- Edit button -->
+                        <a href="/admin/dashboard/alumnis/edit/${selectedAlumni.id}" 
+                           class="btn btn-link p-0 me-3">
+                            <i class="fas fa-edit" style="color: var(--axsos-purple)"></i>
+                        </a>
+                        
+                        <!-- Delete button -->
+                        <form:form action="/admin/dashboard/${selectedAlumni.id}/delete" 
+                                 method="post" 
+                                 class="m-0">
+                            <button type="submit" class="btn btn-link p-0">
+                                <i class="fas fa-trash-alt text-danger"></i>
+                            </button>
+                        </form:form>
                     </div>
+                </c:if>
+            </div>
+
+            <!-- Profile Content -->
+            <c:if test="${selectedAlumni != null}">
+                <div class="profile-details">
+                    <p class="card-text">
+                        <strong>First Name:</strong> ${selectedAlumni.firstName}<br>
+                        <strong>Last Name:</strong> ${selectedAlumni.lastName}<br>
+                        <strong>Email:</strong> ${selectedAlumni.email}<br>
+                    </p>
                 </div>
+            </c:if>
+            
+            <c:if test="${selectedAlumni == null}">
+                <div class="alert alert-info">
+                    Select an Alumni to display their profile.
+                </div>
+            </c:if>
+        </div>
+    </div>
+</div>
             </div>
         </div>
     </div>

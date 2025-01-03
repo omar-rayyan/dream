@@ -115,7 +115,7 @@
             
             <div class="card">
                 <div class="card-body">
-                    <h3 class="card-title text-center">Create an Alumni Account</h3>
+                    <h3 class="card-title text-center"><strong>Register A New Alumni Account</strong></h3>
                     
                     <form:form action="/admin/dashboard/register" id="registrationForm" method="post" modelAttribute="newUser">
                         <div class="mb-3">

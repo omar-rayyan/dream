@@ -131,7 +131,7 @@
         <div class="container">
             <a href="/admin/dashboard" class="btn btn-secondary mb-3">Back to Dashboard</a>
             <div class="d-flex justify-content-between align-items-center mb-4">
-                <h2 class="mt-3">Site Admins</h2>
+                <h2 class="mt-3"><strong>Site Admins</strong></h2>
                 <a href="/admin/dashboard/admins/add" class="btn btn-primary">Add New Admin</a>
             </div>
             <table class="table table-striped table-bordered">
