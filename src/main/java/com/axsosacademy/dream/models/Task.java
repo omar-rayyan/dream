@@ -14,7 +14,7 @@ public class Task {
     private Long id;
     
     @NotEmpty(message = "Task description is required.")
-    @Size(min = 1, max = 30, message = "Task description required.")
+    @Column(columnDefinition = "TEXT")
     private String description;
     
     private boolean completed = false;

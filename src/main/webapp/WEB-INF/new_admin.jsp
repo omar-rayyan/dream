@@ -150,7 +150,7 @@
 
                         <form:hidden path="accountType" value="Admin"/>
                         <div class="d-grid">
-                            <button type="submit" class="btn btn-primary">Add</button>
+                            <button type="submit" class="btn btn-primary">Register</button>
                         </div>
                     </form:form>
                 </div>

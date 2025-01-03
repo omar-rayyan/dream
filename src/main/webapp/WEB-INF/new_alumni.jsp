@@ -135,6 +135,20 @@
                             <form:input path="email" id="registerEmail" class="form-control" />
                             <form:errors path="email" cssClass="text-danger" />
                         </div>
+                        
+                        <div class="mb-3">
+                            <form:label path="password" cssClass="form-label" for="registerPassword">Password:</form:label>
+                            <form:input path="password" id="registerPassword" type="password" class="form-control" placeholder="Enter your password" />
+                            <form:errors path="password" cssClass="text-danger" />
+                        </div>
+
+                        <div class="mb-3">
+                            <form:label path="confirm" cssClass="form-label" for="confirmPassword">Confirm Password:</form:label>
+                            <form:input path="confirm" id="confirmPassword" type="password" class="form-control" placeholder="Confirm your password" />
+                            <form:errors path="confirm" cssClass="text-danger" />
+                        </div>
+                        
+                        <form:hidden path="accountType" value="Alumni"/>
 
                         <button type="submit" class="btn btn-primary w-100">Register</button>
                     </form:form>
