@@ -180,7 +180,7 @@ input[type="checkbox"].fancy-checkbox:checked:hover {
                                 <div class="card mb-3">
                                     <div class="card-body d-flex justify-content-between align-items-center">
                                         <div>
-                                            <h6 class="card-title">${task.author.firstName} ${task.author.lastName}</h6>
+                                            <h6 class="card-title"><strong>${task.author.firstName} ${task.author.lastName}</strong></h6>
                                             <p class="card-text">${task.description}</p>
                                         </div>
                                         <div class="d-flex align-items-center">
