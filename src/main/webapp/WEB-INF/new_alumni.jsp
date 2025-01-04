@@ -31,8 +31,8 @@
         height: 80px;
     }
 
-    .logo-placeholder {
-    width: 20vh;  /* This is already set */
+.logo-placeholder {
+    width: 35vh;  /* This is already set */
     height: 8vh;  /* This is already set */
     background-color: rgba(255, 255, 255, 0.2);
     border-radius: 10vh;
@@ -45,7 +45,7 @@
 
 .logo-placeholder img {
     max-width: 130%;
-    max-height: 120%;  /* Add this to ensure image stays within height bounds */
+    max-height: 115%;  /* Add this to ensure image stays within height bounds */
     width: auto;       /* Let width adjust automatically */
     height: auto;      /* Let height adjust automatically */
     object-fit: contain; /* This ensures the image maintains its aspect ratio */
@@ -129,6 +129,9 @@
             <a href="/admin/dashboard"><div class="logo-placeholder bg-white">
             <img src="https://i.ibb.co/kSSZV8j/image-2024-12-31-123153782.png"
                  alt="AXSOS Academy Logo"
+                 style="max-width: 100%; height: auto;">
+                 <img src="/imgs/dream_logo.png"
+                 alt="DreamTracker Logo"
                  style="max-width: 100%; height: auto;">
         </div></a>
             <div class="d-flex align-items-center">
