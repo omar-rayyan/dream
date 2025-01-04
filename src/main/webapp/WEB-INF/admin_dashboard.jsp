@@ -431,6 +431,9 @@ footer {
 										<strong>First Name:</strong> ${selectedAlumni.firstName}<br>
 										<strong>Last Name:</strong> ${selectedAlumni.lastName}<br>
 										<strong>Email:</strong> ${selectedAlumni.email}<br>
+										<br>
+										<strong>Job Applications:</strong> ${selectedAlumni.jobApplications.size()}<br>
+										<strong>Tasks:</strong> ${selectedAlumni.tasks.size()}<br>
 									</p>
 								</div>
 							</c:if>
