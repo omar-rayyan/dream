@@ -10,6 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="https://i.ibb.co/3NLmf1N/image-2024-12-31-193140352.png" type="image/icon type">
 <title>Admin Dashboard | DreamTracker</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
@@ -66,15 +67,23 @@ body {
         }
 
 .logo-placeholder {
-	width: 200px;
-	height: 60px;
-	background-color: rgba(255, 255, 255, 0.2);
-	border-radius: 8px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	color: white;
-	font-style: italic;
+    width: 20vh;  /* This is already set */
+    height: 8vh;  /* This is already set */
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;  /* Add this to prevent image overflow */
+    padding: 5px;     /* Add some padding */
+}
+
+.logo-placeholder img {
+    max-width: 130%;
+    max-height: 120%;  /* Add this to ensure image stays within height bounds */
+    width: auto;       /* Let width adjust automatically */
+    height: auto;      /* Let height adjust automatically */
+    object-fit: contain; /* This ensures the image maintains its aspect ratio */
 }
 
 .main-content {
@@ -243,7 +252,11 @@ footer {
 <body>
 	<nav class="navbar">
         <div class="container d-flex justify-content-between align-items-center">
-            <div class="logo-placeholder">AXSOS Academy Logo</div>
+            <a href="/admin/dashboard"><div class="logo-placeholder bg-white">
+            <img src="https://i.ibb.co/kSSZV8j/image-2024-12-31-123153782.png"
+                 alt="AXSOS Academy Logo"
+                 style="max-width: 100%; height: auto;">
+        </div></a>
             <div class="d-flex align-items-center">
                 <div class="nav-buttons">
                     <a href="/admin/dashboard/admins" class="btn btn-secondary">Manage Site Admins</a>
