@@ -100,16 +100,16 @@
         <div class="login-box">
             <form:form action="/login" method="post" modelAttribute="newLogin">
                 <div class="mb-4">
-                    <form:label path="email" cssClass="form-label" for="loginEmail">Email:</form:label>
-                    <form:input path="email" id="loginEmail" class="form-control" placeholder="Enter your email" />
+                    <form:label path="email" cssClass="form-label" for="loginEmail"><strong>Email Address:</strong></form:label>
+                    <form:input path="email" id="loginEmail" class="form-control" placeholder="Enter your email address..." />
                     <form:errors path="email" cssClass="text-danger" />
                 </div>
                 <div class="mb-4">
-                    <form:label path="password" class="form-label" for="loginPassword">Password:</form:label>
-                    <form:input path="password" id="loginPassword" type="password" class="form-control" placeholder="Enter your password" />
+                    <form:label path="password" class="form-label" for="loginPassword"><strong>Password:</strong></form:label>
+                    <form:input path="password" id="loginPassword" type="password" class="form-control" placeholder="Enter your password..." />
                     <form:errors path="password" cssClass="text-danger" />
                 </div>
-                <button type="submit" class="btn btn-primary w-100">Sign In</button>
+                <button type="submit" class="btn btn-primary w-100">Login</button>
             </form:form>
         </div>
     </div>

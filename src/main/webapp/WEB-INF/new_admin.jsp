@@ -97,6 +97,21 @@
         text-align: center;
         margin-top: auto;
     }
+    .navbar .nav-buttons {
+        display: flex;
+        gap: 1rem;
+        margin-right: 1rem;
+    }
+    
+    .navbar .btn {
+        padding: 0.5rem 1rem;
+        white-space: nowrap;
+    }
+
+    /* Ensure the logout button stands out */
+    .navbar .btn-outline-light {
+        border-width: 2px;
+    }
     </style>
 </head>
 <body>
@@ -104,6 +119,9 @@
         <div class="container d-flex justify-content-between align-items-center">
             <div class="logo-placeholder">AXSOS Academy Logo</div>
             <div class="d-flex align-items-center">
+                <div class="nav-buttons">
+                    <a href="/admin/dashboard/admins" class="btn btn-secondary">Back to Site Admins Dashboard</a>
+                </div>
                 <a href="/logout" class="btn btn-outline-light ms-3">Logout</a>
             </div>
         </div>
@@ -111,8 +129,6 @@
 
     <div class="main-content">
         <div class="container">
-            <a href="/admin/dashboard/admins" class="btn btn-secondary mb-3">Back to Site Admins Dashboard</a>
-            
             <div class="card">
                 <div class="card-body">
                     <h3 class="card-title text-center"><strong>Register A New Admin Account</strong></h3>

@@ -49,6 +49,22 @@ body {
 	height: 80px;
 }
 
+.navbar .nav-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-right: 1rem;
+        }
+        
+        .navbar .btn {
+            padding: 0.5rem 1rem;
+            white-space: nowrap;
+        }
+        
+        /* Ensure the logout button stands out */
+        .navbar .btn-outline-light {
+            border-width: 2px;
+        }
+
 .logo-placeholder {
 	width: 200px;
 	height: 60px;
@@ -226,14 +242,17 @@ footer {
 
 <body>
 	<nav class="navbar">
-		<div
-			class="container d-flex justify-content-between align-items-center">
-			<div class="logo-placeholder">AXSOS Academy Logo</div>
-			<div class="d-flex align-items-center">
-				<a href="/logout" class="btn btn-outline-light ms-3">Logout</a>
-			</div>
-		</div>
-	</nav>
+        <div class="container d-flex justify-content-between align-items-center">
+            <div class="logo-placeholder">AXSOS Academy Logo</div>
+            <div class="d-flex align-items-center">
+                <div class="nav-buttons">
+                    <a href="/admin/dashboard/admins" class="btn btn-secondary">Manage Site Admins</a>
+                    <a href="/admin/dashboard/alumnis/add" class="btn btn-secondary">Register Alumni</a>
+                </div>
+                <a href="/logout" class="btn btn-outline-light ms-3">Logout</a>
+            </div>
+        </div>
+    </nav>
 
 	<div class="main-content">
 		<div class="container-fluid">
@@ -312,18 +331,6 @@ footer {
 				<!-- Middle Section: Dropdown and Tables -->
 				<div class="col-md-7 border-end">
 					<div class="mb-4">
-						<div
-							class="mb-4 d-flex align-items-center justify-content-between">
-							<div class="d-flex align-items-center">
-								<div></div>
-							</div>
-							<div>
-								<a href="/admin/dashboard/admins" class="btn btn-primary me-2">Manage
-									Site Admins</a> <a href="/admin/dashboard/alumnis/add"
-									class="btn btn-secondary">Add Alumni</a>
-							</div>
-						</div>
-
 						<select id="alumniDropdown" class="form-select select2"
 							name="alumniId">
 							<c:if test="${selectedAlumni == null}">
@@ -372,7 +379,7 @@ footer {
 															<!-- Job details section -->
 															<div class="job-details">
 																<p class="card-text mb-2">
-																	${jobApplication.organization}</p>
+																	<strong>@</strong> ${jobApplication.organization}</p>
 																<p class="card-text mb-0">${jobApplication.notes}</p>
 															</div>
 														</div>

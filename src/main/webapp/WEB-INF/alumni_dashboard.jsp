@@ -21,7 +21,11 @@
 	--axsos-dark: #3A0A4C;
 	--axsos-hover: #5a0c9a;
 }
-
+.alert, .alert-info {
+	background-color: #691489; /* Example Axsos color */
+	color: #ffffff; /* Ensure the text is readable */
+	border-color: #D9D9D9;
+}
 body {
 	background-color: var(--axsos-light-gray);
 	min-height: 100vh;
@@ -180,24 +184,22 @@ footer {
 
 <body>
 	<nav class="navbar">
-		<div
-			class="container d-flex justify-content-between align-items-center">
-			<div class="logo-placeholder">AXSOS Academy Logo</div>
-			<div class="d-flex align-items-center">
-				<a href="/logout" class="btn btn-outline-light ms-3">Logout</a>
-			</div>
-		</div>
-	</nav>
+    <div class="container position-relative d-flex justify-content-between align-items-center">
+        <div class="logo-placeholder">AXSOS Academy Logo</div>
+        <h2 class="text-white mb-0 position-absolute start-50 translate-middle-x"><strong>Alumni Dashboard</strong></h2>
+        <div class="d-flex align-items-center">
+            <a href="/logout" class="btn btn-outline-light ms-3">Logout</a>
+        </div>
+    </div>
+</nav>
 
 	<div class="main-content">
 		<div class="container">
 			<div class="card">
 				<div class="card-body">
-					<h3 class="card-title text-center">Alumni Dashboard</h3>
-
 					<div class="row">
 						<div class="col-md-3 border-end">
-							<h4 class="text-center">Tasks</h4>
+							<h4 class="text-center"><strong>Tasks</strong></h4>
 							<c:forEach var="task" items="${alumniTasks}">
 								<div class="card mb-3">
 									<div
@@ -231,13 +233,12 @@ footer {
 						</div>
 
 						<div class="col-md-9">
-							<h4 class="d-flex justify-content-between align-items-center">
-								<span>Job Applications</span>
-								<div>
-									<a href="/alumni/dashboard/jobApplication/new"
-										class="btn btn-primary">Add Job Application</a>
-								</div>
-							</h4>
+							<div class="position-relative d-flex justify-content-center align-items-center mb-3">
+    <h4 class="mb-1 mt-1"><strong>Job Applications</strong></h4>
+    <div class="position-absolute end-0">
+        <a href="/alumni/dashboard/jobApplication/new" class="btn btn-primary">Add Job Application</a>
+    </div>
+</div>
 
 							<div class="d-flex justify-content-between">
 								<c:forEach var="status"
@@ -286,7 +287,7 @@ footer {
 																	<!-- Job details section -->
 																	<div class="job-details">
 																		<p class="card-text mb-2">
-																			${jobApplication.organization}</p>
+																			<strong>@</strong> ${jobApplication.organization}</p>
 																		<p class="card-text mb-0">${jobApplication.notes}
 																		</p>
 																	</div>
