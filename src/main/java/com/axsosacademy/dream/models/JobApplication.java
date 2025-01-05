@@ -21,6 +21,13 @@ public class JobApplication {
     @Size(min = 1, max = 30, message = "Organization required.")
     private String organization;
     
+    @NotEmpty(message = "Location is required.")
+    @Size(min = 1, max = 30, message = "Location required.")
+    private String location;
+    
+    private String website;
+    
+    @Column(columnDefinition = "TEXT")
     private String notes;
     
     @NotEmpty(message = "Application status is required.")
@@ -52,12 +59,14 @@ public class JobApplication {
     public JobApplication() {}
     
 
-	public JobApplication(String title, String organization, String notes, String status, Alumni owner) {
+	public JobApplication(String title, String organization, String notes, String status, Alumni owner, String location, String website) {
 		this.title = title;
 		this.organization = organization;
 		this.notes = notes;
 		this.status = status;
 		this.owner = owner;
+		this.location = location;
+		this.website = website;
 	}
 
 	public Long getId() {
@@ -74,6 +83,22 @@ public class JobApplication {
 	
 	public String getStringId() {
 		return id.toString();
+	}
+	
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+	public String getWebsite() {
+		return website;
+	}
+
+	public void setWebsite(String website) {
+		this.website = website;
 	}
 
 	public void setTitle(String title) {

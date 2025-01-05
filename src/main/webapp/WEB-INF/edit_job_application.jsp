@@ -230,11 +230,23 @@
                             <form:input path="title" class="form-control" value="${jobApplication.title}"/>
                             <form:errors path="title" cssClass="text-danger" />
                         </div>
-
+                        
                         <div class="mb-4">
                             <label for="organization" class="form-label">Organization</label>
                             <form:input path="organization" class="form-control" value="${jobApplication.organization}"/>
                             <form:errors path="organization" cssClass="text-danger" />
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label for="location" class="form-label">Location</label>
+                            <form:input path="location" class="form-control" value="${jobApplication.location}"/>
+                            <form:errors path="location" cssClass="text-danger" />
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label for="website" class="form-label">Website Link</label>
+                            <form:input path="website" class="form-control" value="${jobApplication.website}"/>
+                            <form:errors path="website" cssClass="text-danger" />
                         </div>
 
                         <div class="mb-4">

@@ -473,8 +473,15 @@ DOCTYPE html> <html lang ="en "><!--Previous head content remains the same -->
 															<!-- Job details section -->
 															<div class="job-details">
 																<p class="card-text mb-2">
-																	<strong>@</strong> ${jobApplication.organization}
+																	<strong>@</strong>
+																	<c:if test="${not jobApplication.website.equals('')}">
+																		<a href="${jobApplication.website}" target="_blank">
+																			${jobApplication.organization}</a>
+																	</c:if>
+																	<c:if test="${jobApplication.website.equals('')}">
+																			${jobApplication.organization}</c:if>
 																</p>
+																<p class="card-text mb-0">${jobApplication.location}</p>
 																<p class="card-text mb-0">${jobApplication.notes}</p>
 															</div>
 														</div>

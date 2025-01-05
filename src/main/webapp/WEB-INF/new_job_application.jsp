@@ -188,6 +188,18 @@
                             <form:input path="organization" id="organization" class="form-control" placeholder="Enter the organization" />
                             <form:errors path="organization" cssClass="text-danger" />
                         </div>
+                        
+                        <div class="mb-3">
+                            <form:label path="location" cssClass="form-label" for="location">Location:</form:label>
+                            <form:input path="location" id="location" class="form-control" placeholder="Enter the location" />
+                            <form:errors path="location" cssClass="text-danger" />
+                        </div>
+                        
+                        <div class="mb-3">
+                            <form:label path="website" cssClass="form-label" for="website">Website Link:</form:label>
+                            <form:input path="website" id="website" class="form-control" placeholder="Enter the website link" />
+                            <form:errors path="website" cssClass="text-danger" />
+                        </div>
 
                         <div class="mb-3">
                             <form:label path="status" cssClass="form-label" for="status">Status:</form:label>
