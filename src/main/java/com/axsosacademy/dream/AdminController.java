@@ -174,12 +174,13 @@ public class AdminController {
             }
 
             // Create a temporary file
-            String fileName = alumni.getFirstName() + "_" + alumni.getLastName() + "_applications.xlsx";
+            String fileName = alumni.getFirstName() + "_" + alumni.getLastName() + "_data.xlsx";
             Path tempFile = Files.createTempFile(null, ".xlsx");
             
-            // Export to Excel
+            // Export to Excel with both job applications and tasks
             excelExportService.exportJobApplicationsToExcel(
-                new ArrayList<>(alumni.getJobApplications()), 
+                new ArrayList<>(alumni.getJobApplications()),
+                new ArrayList<>(alumni.getTasks()),
                 tempFile.toString()
             );
 

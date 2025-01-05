@@ -592,11 +592,6 @@ DOCTYPE html> <html lang ="en "><!--Previous head content remains the same -->
 
 
 	<script>
-	function confirmExport(alumniId) {
-	    if (confirm("Are you sure you want to export this alumni's data to Excel?")) {
-	        window.location.href = '/admin/dashboard/export/' + alumniId;
-	    }
-	}
 	let currentAlumniId = null;
 
 	function showExportModal(alumniId) {
@@ -608,6 +603,8 @@ DOCTYPE html> <html lang ="en "><!--Previous head content remains the same -->
 	document.getElementById('confirmExportBtn').addEventListener('click', function() {
 	    if (currentAlumniId) {
 	        window.location.href = '/admin/dashboard/export/' + currentAlumniId;
+	        const modal = bootstrap.Modal.getInstance(document.getElementById('exportModal'));
+	        modal.hide();
 	    }
 	});
 		$(document)
