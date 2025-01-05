@@ -24,7 +24,15 @@ public class LoginController {
     }
 
     @GetMapping("/")
-    public String index(Model model) {
+    public String index(Model model, HttpSession session) {
+    	if (session.getAttribute("loggedUser") != null) {
+            User user = (User) session.getAttribute("loggedUser");
+            if (user instanceof Admin) {
+                return "redirect:/admin/dashboard";
+            } else if (user instanceof Alumni) {
+                return "redirect:/alumni/dashboard";
+            }
+        }
         model.addAttribute("newLogin", new LoginUser());
         return "index.jsp";
     }
@@ -66,5 +74,10 @@ public class LoginController {
         }
 
         return "redirect:/";
+    }
+    
+    @GetMapping("/aboutus")
+    public String aboutUs() {
+        return "about_us.jsp";
     }
 }

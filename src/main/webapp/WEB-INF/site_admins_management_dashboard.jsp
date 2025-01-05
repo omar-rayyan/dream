@@ -10,7 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Site Admins Management Dashboard | DreamTracker</title>
+<title>Site Admins Management Dashboard | DreamTrackr</title>
 <link rel="icon"
 	href="https://i.ibb.co/3NLmf1N/image-2024-12-31-193140352.png"
 	type="image/icon type">
@@ -248,7 +248,7 @@ footer {
 
 	<footer>
 		<div class="container">
-			<p class="mb-0">&copy; 2025 AXSOS Academy. All rights reserved.</p>
+			<p class="mb-0">&copy; 2025 AXSOS Academy. All rights reserved. | <a href="/aboutus" class="text-white">About Us</a></p>
 		</div>
 	</footer>
 </body>

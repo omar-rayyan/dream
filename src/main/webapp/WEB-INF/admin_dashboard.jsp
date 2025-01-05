@@ -11,7 +11,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" href="https://i.ibb.co/3NLmf1N/image-2024-12-31-193140352.png" type="image/icon type">
-<title>Admin Dashboard | DreamTracker</title>
+<title>Admin Dashboard | DreamTrackr</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -493,7 +493,7 @@ footer {
 
 	<footer>
 		<div class="container">
-			<p class="mb-0">&copy; 2025 AXSOS Academy. All rights reserved.</p>
+			<p class="mb-0">&copy; 2025 AXSOS Academy. All rights reserved. | <a href="/aboutus" class="text-white">About Us</a></p>
 		</div>
 	</footer>
 
