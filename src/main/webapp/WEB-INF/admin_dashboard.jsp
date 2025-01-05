@@ -273,6 +273,56 @@ footer {
 	background-color: var(--axsos-hover);
 	border-color: var(--axsos-hover);
 }
+
+<!
+DOCTYPE html> <html lang ="en "><!--Previous head content remains the same -->
+	<style> /* Add these styles to your existing stylesheet */
+	.modal-content {
+	border-radius: 10px;
+	border: none;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.modal-header {
+	background-color: var(--axsos-purple);
+	color: white;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	padding: 1rem;
+}
+
+.modal-title {
+	font-weight: 500;
+}
+
+.modal-body {
+	padding: 1.5rem;
+}
+
+.modal-footer {
+	border-top: none;
+	padding: 1rem;
+}
+
+.btn-cancel {
+	background-color: var(--axsos-light-gray);
+	color: var(--axsos-dark);
+	border: none;
+	padding: 0.75rem 1.5rem;
+	font-weight: 500;
+	transition: all 0.3s ease;
+}
+
+.btn-cancel:hover {
+	background-color: #c0c0c0;
+	color: var(--axsos-dark);
+}
+
+.modal-icon {
+	font-size: 2.5rem;
+	color: var(--axsos-purple);
+	margin-bottom: 1rem;
+}
 </style>
 </head>
 
@@ -452,11 +502,12 @@ footer {
 								<c:if test="${selectedAlumni != null}">
 									<div class="d-flex align-items-center">
 										<!-- Edit button -->
-										<a href="/admin/dashboard/export/${selectedAlumni.id}"
-											class="btn btn-link p-0 me-1"> <i class="fas fa-file-excel me-2"
+										<a href="#"
+											onclick="showExportModal(${selectedAlumni.id}); return false;"
+											class="btn btn-link p-0 me-1"> <i
+											class="fas fa-file-excel me-2"
 											style="color: var(--axsos-purple)"></i>
-										</a>
-										<a href="/admin/dashboard/alumnis/edit/${selectedAlumni.id}"
+										</a> <a href="/admin/dashboard/alumnis/edit/${selectedAlumni.id}"
 											class="btn btn-link p-0 me-3"> <i class="fas fa-edit"
 											style="color: var(--axsos-purple)"></i>
 										</a>
@@ -507,7 +558,32 @@ footer {
 			</p>
 		</div>
 	</footer>
-
+	<div class="modal fade" id="exportModal" tabindex="-1"
+		aria-labelledby="exportModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exportModalLabel">Export to Excel</h5>
+					<button type="button" class="btn-close btn-close-white"
+						data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body text-center">
+					<div class="modal-icon">
+						<i class="fas fa-file-excel"></i>
+					</div>
+					<p>Are you sure you want to export this alumni's data to Excel?</p>
+					<p class="text-muted">This will download all related data
+						including job applications and tasks.</p>
+				</div>
+				<div class="modal-footer justify-content-center">
+					<button type="button" class="btn btn-cancel"
+						data-bs-dismiss="modal">Cancel</button>
+					<button type="button" class="btn btn-primary" id="confirmExportBtn">Export
+						Data</button>
+				</div>
+			</div>
+		</div>
+	</div>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -516,8 +592,27 @@ footer {
 
 
 	<script>
+	function confirmExport(alumniId) {
+	    if (confirm("Are you sure you want to export this alumni's data to Excel?")) {
+	        window.location.href = '/admin/dashboard/export/' + alumniId;
+	    }
+	}
+	let currentAlumniId = null;
+
+	function showExportModal(alumniId) {
+	    currentAlumniId = alumniId;
+	    const modal = new bootstrap.Modal(document.getElementById('exportModal'));
+	    modal.show();
+	}
+
+	document.getElementById('confirmExportBtn').addEventListener('click', function() {
+	    if (currentAlumniId) {
+	        window.location.href = '/admin/dashboard/export/' + currentAlumniId;
+	    }
+	});
 		$(document)
 				.ready(
+						
 						function() {
 							$('.select2').select2({
 								theme : 'bootstrap-5',
