@@ -42,7 +42,7 @@ public class ExcelExportService {
     private void createJobApplicationsSheet(Workbook workbook, Sheet sheet, List<JobApplication> jobApplications) {
         // Create header row
         Row headerRow = sheet.createRow(0);
-        String[] columns = {"Title", "Organization", "Status", "Notes", "Date Applied"};
+        String[] columns = {"Title", "Organization", "Status", "Notes", "Website", "Date Applied"};
         
         // Style for header
         CellStyle headerStyle = createHeaderStyle(workbook);
@@ -63,7 +63,8 @@ public class ExcelExportService {
             row.createCell(1).setCellValue(job.getOrganization());
             row.createCell(2).setCellValue(job.getStatus());
             row.createCell(3).setCellValue(job.getNotes());
-            row.createCell(4).setCellValue(job.getCreatedAt().toString());
+            row.createCell(4).setCellValue(job.getWebsite());
+            row.createCell(5).setCellValue(job.getCreatedAt().toString());
         }
 
         // Auto-size columns
