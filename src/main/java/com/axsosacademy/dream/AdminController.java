@@ -21,9 +21,22 @@ import com.axsosacademy.dream.models.User;
 import com.axsosacademy.dream.models.UserProfileUpdateDTO;
 import com.axsosacademy.dream.services.AdminService;
 import com.axsosacademy.dream.services.AlumniService;
+import com.axsosacademy.dream.services.ExcelExportService;
 import com.axsosacademy.dream.services.JobApplicationService;
 import com.axsosacademy.dream.services.TaskService;
 import com.axsosacademy.dream.services.UserService;
+
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
+
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -44,6 +57,9 @@ public class AdminController {
 	
 	@Autowired
 	JobApplicationService jobApplicationService;
+	
+	@Autowired
+    private ExcelExportService excelExportService;
 	
     @GetMapping("/admin/dashboard")
     public String adminDashboard(HttpSession session, Model model) {
@@ -146,6 +162,39 @@ public class AdminController {
         }
 
         return "redirect:/admin/dashboard";
+    }
+    
+    @GetMapping("/admin/dashboard/export/{alumniId}")
+    public ResponseEntity<Resource> exportJobApplications(@PathVariable Long alumniId, HttpServletRequest request) {
+        try {
+            // Get the alumni and their job applications
+            Alumni alumni = alumniService.findById(alumniId);
+            if (alumni == null) {
+                return ResponseEntity.notFound().build();
+            }
+
+            // Create a temporary file
+            String fileName = alumni.getFirstName() + "_" + alumni.getLastName() + "_applications.xlsx";
+            Path tempFile = Files.createTempFile(null, ".xlsx");
+            
+            // Export to Excel
+            excelExportService.exportJobApplicationsToExcel(
+                new ArrayList<>(alumni.getJobApplications()), 
+                tempFile.toString()
+            );
+
+            // Prepare the response
+            ByteArrayResource resource = new ByteArrayResource(Files.readAllBytes(tempFile));
+
+            return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + fileName)
+                .contentType(MediaType.parseMediaType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"))
+                .body(resource);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.internalServerError().build();
+        }
     }
     
     @PostMapping("/admin/dashboard/tasks/add/{id}")

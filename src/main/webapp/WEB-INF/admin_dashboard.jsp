@@ -10,7 +10,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" href="https://i.ibb.co/3NLmf1N/image-2024-12-31-193140352.png" type="image/icon type">
+<link rel="icon"
+	href="https://i.ibb.co/3NLmf1N/image-2024-12-31-193140352.png"
+	type="image/icon type">
 <title>Admin Dashboard | DreamTrackr</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
@@ -46,71 +48,71 @@ body {
 }
 
 .navbar .nav-buttons {
-            display: flex;
-            gap: 1rem;
-            margin-right: 1rem;
-        }
-        
-        .navbar .btn {
-            padding: 0.5rem 1rem;
-            white-space: nowrap;
-        }
-        
-        /* Ensure the logout button stands out */
-        .navbar .btn-outline-light {
-            border-width: 2px;
-        }
+	display: flex;
+	gap: 1rem;
+	margin-right: 1rem;
+}
+
+.navbar .btn {
+	padding: 0.5rem 1rem;
+	white-space: nowrap;
+}
+
+/* Ensure the logout button stands out */
+.navbar .btn-outline-light {
+	border-width: 2px;
+}
+
 .navbar {
-    background-color: var(--axsos-purple);
-    min-height: 80px;
-    padding: 0.5rem 0;
+	background-color: var(--axsos-purple);
+	min-height: 80px;
+	padding: 0.5rem 0;
 }
 
 .logo-placeholder {
-    /* Remove fixed width/height */
-    max-width: 250px; /* Set a maximum width */
-    min-width: 120px; /* Set a minimum width */
-    height: auto;
-    background-color: rgba(255, 255, 255, 0.2);
-    border-radius: 90px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    padding: 0.5rem;
-    padding-right: 1rem;
+	/* Remove fixed width/height */
+	max-width: 250px; /* Set a maximum width */
+	min-width: 120px; /* Set a minimum width */
+	height: auto;
+	background-color: rgba(255, 255, 255, 0.2);
+	border-radius: 90px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
+	padding: 0.5rem;
+	padding-right: 1rem;
 }
 
 .logo-placeholder img {
-    width: 100%;
-    height: auto;
-    max-height: 60px;
-    object-fit: contain;
-}
-@media (max-width: 768px) {
-    .navbar h2 {
-        font-size: 1.5rem;
-    }
-    
-    .logo-placeholder {
-        max-width: 150px;
-    }
+	width: 100%;
+	height: auto;
+	max-height: 60px;
+	object-fit: contain;
 }
 
-@media (max-width: 576px) {
-    .navbar h2 {
-        font-size: 1.25rem;
-    }
-    
-    .logo-placeholder {
-        max-width: 120px;
-    }
-    
-    .navbar .btn {
-        padding: 0.375rem 0.75rem;
-        font-size: 0.875rem;
-    }
+@media ( max-width : 768px) {
+	.navbar h2 {
+		font-size: 1.5rem;
+	}
+	.logo-placeholder {
+		max-width: 150px;
+	}
 }
+
+@media ( max-width : 576px) {
+	.navbar h2 {
+		font-size: 1.25rem;
+	}
+	.logo-placeholder {
+		max-width: 120px;
+	}
+	.navbar .btn {
+		padding: 0.375rem 0.75rem;
+		font-size: 0.875rem;
+	}
+}
+
 .main-content {
 	flex: 1;
 	padding: 2rem;
@@ -276,24 +278,24 @@ footer {
 
 <body>
 	<nav class="navbar">
-        <div class="container d-flex justify-content-between align-items-center">
-            <a href="/admin/dashboard"><div class="logo-placeholder bg-white">
-            <img src="https://i.ibb.co/kSSZV8j/image-2024-12-31-123153782.png"
-                 alt="AXSOS Academy Logo"
-                 style="max-width: 100%; height: auto;">
-                 <img src="/imgs/dream_logo.png"
-                 alt="DreamTracker Logo"
-                 style="max-width: 100%; height: auto;">
-        </div></a>
-            <div class="d-flex align-items-center">
-                <div class="nav-buttons">
-                    <a href="/admin/dashboard/admins" class="btn btn-secondary">Manage Site Admins</a>
-                    <a href="/admin/dashboard/alumnis/add" class="btn btn-secondary">Register Alumni</a>
-                </div>
-                <a href="/logout" class="btn btn-outline-light ms-3">Logout</a>
-            </div>
-        </div>
-    </nav>
+		<div
+			class="container d-flex justify-content-between align-items-center">
+			<a href="/admin/dashboard"><div class="logo-placeholder bg-white">
+					<img src="https://i.ibb.co/kSSZV8j/image-2024-12-31-123153782.png"
+						alt="AXSOS Academy Logo" style="max-width: 100%; height: auto;">
+					<img src="/imgs/dream_logo.png" alt="DreamTracker Logo"
+						style="max-width: 100%; height: auto;">
+				</div></a>
+			<div class="d-flex align-items-center">
+				<div class="nav-buttons">
+					<a href="/admin/dashboard/admins" class="btn btn-secondary">Manage
+						Site Admins</a> <a href="/admin/dashboard/alumnis/add"
+						class="btn btn-secondary">Register Alumni</a>
+				</div>
+				<a href="/logout" class="btn btn-outline-light ms-3">Logout</a>
+			</div>
+		</div>
+	</nav>
 
 	<div class="main-content">
 		<div class="container-fluid">
@@ -314,7 +316,8 @@ footer {
 								Description</label>
 							<textarea name="description" class="form-control"
 								<c:if test='${selectedAlumni == null}'> disabled</c:if>
-								id="taskDescription" rows="3" required placeholder="Describe the task..."></textarea>
+								id="taskDescription" rows="3" required
+								placeholder="Describe the task..."></textarea>
 						</div>
 						<div class="text-center">
 							<button type="submit" class="btn btn-primary"
@@ -420,7 +423,8 @@ footer {
 															<!-- Job details section -->
 															<div class="job-details">
 																<p class="card-text mb-2">
-																	<strong>@</strong> ${jobApplication.organization}</p>
+																	<strong>@</strong> ${jobApplication.organization}
+																</p>
 																<p class="card-text mb-0">${jobApplication.notes}</p>
 															</div>
 														</div>
@@ -448,6 +452,10 @@ footer {
 								<c:if test="${selectedAlumni != null}">
 									<div class="d-flex align-items-center">
 										<!-- Edit button -->
+										<a href="/admin/dashboard/export/${selectedAlumni.id}"
+											class="btn btn-link p-0 me-1"> <i class="fas fa-file-excel me-2"
+											style="color: var(--axsos-purple)"></i>
+										</a>
 										<a href="/admin/dashboard/alumnis/edit/${selectedAlumni.id}"
 											class="btn btn-link p-0 me-3"> <i class="fas fa-edit"
 											style="color: var(--axsos-purple)"></i>
@@ -471,11 +479,11 @@ footer {
 									<p class="card-text">
 										<strong>First Name:</strong> ${selectedAlumni.firstName}<br>
 										<strong>Last Name:</strong> ${selectedAlumni.lastName}<br>
-										<strong>Email:</strong> ${selectedAlumni.email}<br>
-										<br>
+										<strong>Email:</strong> ${selectedAlumni.email}<br> <br>
 										<strong>Bootcamp:</strong> ${selectedAlumni.bootcamp}<br>
-										<strong>Job Applications:</strong> ${selectedAlumni.jobApplications.size()}<br>
-										<strong>Tasks:</strong> ${selectedAlumni.tasks.size()}<br>
+										<strong>Job Applications:</strong>
+										${selectedAlumni.jobApplications.size()}<br> <strong>Tasks:</strong>
+										${selectedAlumni.tasks.size()}<br>
 									</p>
 								</div>
 							</c:if>
@@ -493,7 +501,10 @@ footer {
 
 	<footer>
 		<div class="container">
-			<p class="mb-0">&copy; 2025 AXSOS Academy. All rights reserved. | <a href="/aboutus" class="text-white">About Us</a></p>
+			<p class="mb-0">
+				&copy; 2025 AXSOS Academy. All rights reserved. | <a href="/aboutus"
+					class="text-white">About Us</a>
+			</p>
 		</div>
 	</footer>
 
