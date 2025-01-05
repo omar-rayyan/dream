@@ -274,13 +274,13 @@ footer {
 	border-color: var(--axsos-hover);
 }
 
-<!
-DOCTYPE html> <html lang ="en "><!--Previous head content remains the same -->
-	<style> /* Add these styles to your existing stylesheet */
-	.modal-content {
-	border-radius: 10px;
-	border: none;
-	box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+.bg-purple {
+    background-color: var(--axsos-purple);
+}
+
+.modal-content {
+    border: 0;
+    overflow: hidden;  
 }
 
 .modal-header {
@@ -569,10 +569,8 @@ DOCTYPE html> <html lang ="en "><!--Previous head content remains the same -->
 		aria-labelledby="exportModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content">
-				<div class="modal-header">
+				<div class="modal-header rounded-top bg-purple text-white border-0">
 					<h5 class="modal-title" id="exportModalLabel">Export to Excel</h5>
-					<button type="button" class="btn-close btn-close-white"
-						data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body text-center">
 					<div class="modal-icon">
