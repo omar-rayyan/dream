@@ -2,8 +2,9 @@ package com.axsosacademy.dream.services;
 
 import com.axsosacademy.dream.models.Admin;
 import com.axsosacademy.dream.models.Alumni;
+import com.axsosacademy.dream.models.AlumniRegistrationForm;
 import com.axsosacademy.dream.models.LoginUser;
-import com.axsosacademy.dream.models.RegistrationForm;
+import com.axsosacademy.dream.models.AdminRegistrationForm;
 import com.axsosacademy.dream.models.User;
 import com.axsosacademy.dream.repositories.AdminRepository;
 import com.axsosacademy.dream.repositories.AlumniRepository;
@@ -42,24 +43,14 @@ public class UserService {
      * @param bindingResult Validation container for errors.
      * @return The saved user or null if validation fails.
      */
-    public User register(RegistrationForm registrationForm, BindingResult bindingResult) {
-        validateRegistration(registrationForm, bindingResult);
+    public User registerAdmin(AdminRegistrationForm registrationForm, BindingResult bindingResult) {
+        validateAdminRegistration(registrationForm, bindingResult);
 
         if (bindingResult.hasErrors()) {
             return null;
         }
 
-        User newUser;
-        switch (registrationForm.getAccountType()) {
-            case "Alumni":
-                newUser = new Alumni();
-                break;
-            case "Admin":
-                newUser = new Admin();
-                break;
-            default:
-                return null;
-        }
+        Admin newUser = new Admin();
         
         newUser.setFirstName(registrationForm.getFirstName());
         newUser.setLastName(registrationForm.getLastName());
@@ -71,7 +62,38 @@ public class UserService {
         return userRepository.save(newUser);
     }
     
-    public void validateRegistration(RegistrationForm registrationForm, BindingResult bindingResult) {
+    public User registerAlumni(AlumniRegistrationForm registrationForm, BindingResult bindingResult) {
+        validateAlumniRegistration(registrationForm, bindingResult);
+
+        if (bindingResult.hasErrors()) {
+            return null;
+        }
+
+        Alumni newUser = new Alumni();
+        
+        newUser.setFirstName(registrationForm.getFirstName());
+        newUser.setLastName(registrationForm.getLastName());
+        newUser.setEmail(registrationForm.getEmail());
+        newUser.setBootcamp(registrationForm.getBootcamp());
+
+        String hashedPassword = BCrypt.hashpw(registrationForm.getPassword(), BCrypt.gensalt());
+        newUser.setPassword(hashedPassword);
+
+        return userRepository.save(newUser);
+    }
+    
+    public void validateAdminRegistration(AdminRegistrationForm registrationForm, BindingResult bindingResult) {
+        Optional<User> existingUser = userRepository.findByEmail(registrationForm.getEmail());
+        if (existingUser.isPresent()) {
+            bindingResult.rejectValue("email", "EmailExists", "This email is already registered.");
+        }
+
+        if (!registrationForm.isPasswordMatch()) {
+            bindingResult.rejectValue("confirm", "Matches", "Passwords do not match.");
+        }
+    }
+    
+    public void validateAlumniRegistration(AlumniRegistrationForm registrationForm, BindingResult bindingResult) {
         Optional<User> existingUser = userRepository.findByEmail(registrationForm.getEmail());
         if (existingUser.isPresent()) {
             bindingResult.rejectValue("email", "EmailExists", "This email is already registered.");

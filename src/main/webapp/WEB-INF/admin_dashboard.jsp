@@ -314,7 +314,7 @@ footer {
 								Description</label>
 							<textarea name="description" class="form-control"
 								<c:if test='${selectedAlumni == null}'> disabled</c:if>
-								id="taskDescription" rows="3" required></textarea>
+								id="taskDescription" rows="3" required placeholder="Describe the task..."></textarea>
 						</div>
 						<div class="text-center">
 							<button type="submit" class="btn btn-primary"
@@ -473,6 +473,7 @@ footer {
 										<strong>Last Name:</strong> ${selectedAlumni.lastName}<br>
 										<strong>Email:</strong> ${selectedAlumni.email}<br>
 										<br>
+										<strong>Bootcamp:</strong> ${selectedAlumni.bootcamp}<br>
 										<strong>Job Applications:</strong> ${selectedAlumni.jobApplications.size()}<br>
 										<strong>Tasks:</strong> ${selectedAlumni.tasks.size()}<br>
 									</p>

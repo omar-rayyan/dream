@@ -175,34 +175,34 @@
                 <div class="card-body">
                     <h3 class="card-title text-center"><strong>Register A New Admin Account</strong></h3>
                     
-                    <form:form action="/admin/dashboard/register" id="registrationForm" method="post" modelAttribute="newUser">
+                    <form:form action="/admin/dashboard/admins/register" id="registrationForm" method="post" modelAttribute="newUser">
                         <div class="mb-3">
                             <form:label path="firstName" cssClass="form-label" for="registerFirstName">First Name:</form:label>
-                            <form:input path="firstName" id="registerFirstName" class="form-control" placeholder="Enter your first name" />
+                            <form:input path="firstName" id="registerFirstName" class="form-control" placeholder="Enter first name..." />
                             <form:errors path="firstName" cssClass="text-danger" />
                         </div>
 
                         <div class="mb-3">
                             <form:label path="lastName" cssClass="form-label" for="registerLastName">Last Name:</form:label>
-                            <form:input path="lastName" id="registerLastName" class="form-control" placeholder="Enter your last name" />
+                            <form:input path="lastName" id="registerLastName" class="form-control" placeholder="Enter last name..." />
                             <form:errors path="lastName" cssClass="text-danger" />
                         </div>
 
                         <div class="mb-3">
                             <form:label path="email" cssClass="form-label" for="registerEmail">Email:</form:label>
-                            <form:input path="email" id="registerEmail" class="form-control" placeholder="Enter your email" />
+                            <form:input path="email" id="registerEmail" class="form-control" placeholder="Enter email address..." />
                             <form:errors path="email" cssClass="text-danger" />
                         </div>
 
                         <div class="mb-3">
                             <form:label path="password" cssClass="form-label" for="registerPassword">Password:</form:label>
-                            <form:input path="password" id="registerPassword" type="password" class="form-control" placeholder="Enter your password" />
+                            <form:input path="password" id="registerPassword" type="password" class="form-control" placeholder="Enter password.." />
                             <form:errors path="password" cssClass="text-danger" />
                         </div>
 
                         <div class="mb-3">
                             <form:label path="confirm" cssClass="form-label" for="confirmPassword">Confirm Password:</form:label>
-                            <form:input path="confirm" id="confirmPassword" type="password" class="form-control" placeholder="Confirm your password" />
+                            <form:input path="confirm" id="confirmPassword" type="password" class="form-control" placeholder="Confirm password..." />
                             <form:errors path="confirm" cssClass="text-danger" />
                         </div>
 

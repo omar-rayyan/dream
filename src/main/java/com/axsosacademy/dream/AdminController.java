@@ -13,8 +13,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.axsosacademy.dream.models.Admin;
 import com.axsosacademy.dream.models.Alumni;
+import com.axsosacademy.dream.models.AlumniRegistrationForm;
 import com.axsosacademy.dream.models.PasswordForm;
-import com.axsosacademy.dream.models.RegistrationForm;
+import com.axsosacademy.dream.models.AdminRegistrationForm;
 import com.axsosacademy.dream.models.Task;
 import com.axsosacademy.dream.models.User;
 import com.axsosacademy.dream.models.UserProfileUpdateDTO;
@@ -220,7 +221,7 @@ public class AdminController {
     	if (session.getAttribute("loggedUser") == null || !(session.getAttribute("loggedUser") instanceof Admin)) {
             return "redirect:/";
         }
-    	model.addAttribute("newUser", new RegistrationForm());
+    	model.addAttribute("newUser", new AlumniRegistrationForm());
         return "new_alumni.jsp";
     }
     
@@ -229,8 +230,27 @@ public class AdminController {
     	if (session.getAttribute("loggedUser") == null || !(session.getAttribute("loggedUser") instanceof Admin)) {
             return "redirect:/";
         }
-    	model.addAttribute("newUser", new RegistrationForm());
+    	model.addAttribute("newUser", new AdminRegistrationForm());
         return "new_admin.jsp";
+    }
+    
+    @PostMapping("/admin/dashboard/admins/register")
+    public String registerAdmin(@Valid @ModelAttribute("newUser") AdminRegistrationForm registrationForm, BindingResult bindingResult,
+                           Model model, HttpSession session) {
+
+        // Validate registration including password match
+        userService.validateAdminRegistration(registrationForm, bindingResult);
+
+        if (bindingResult.hasErrors()) {
+            return "new_admin.jsp";
+        }
+
+        userService.registerAdmin(registrationForm, bindingResult);
+
+        if (bindingResult.hasErrors()) {
+            return "new_admin.jsp";
+        }
+        return "redirect:/admin/dashboard/admins";
     }
     
     @PostMapping("/admin/dashboard/tasks/update")
@@ -273,17 +293,17 @@ public class AdminController {
     }
     
     @PostMapping("/admin/dashboard/register")
-    public String register(@Valid @ModelAttribute("newUser") RegistrationForm registrationForm, BindingResult bindingResult,
+    public String register(@Valid @ModelAttribute("newUser") AlumniRegistrationForm registrationForm, BindingResult bindingResult,
                            Model model, HttpSession session) {
 
         // Validate registration including password match
-        userService.validateRegistration(registrationForm, bindingResult);
+        userService.validateAlumniRegistration(registrationForm, bindingResult);
 
         if (bindingResult.hasErrors()) {
             return "new_alumni.jsp";
         }
 
-        userService.register(registrationForm, bindingResult);
+        userService.registerAlumni(registrationForm, bindingResult);
 
         if (bindingResult.hasErrors()) {
             return "new_alumni.jsp";

@@ -206,7 +206,7 @@
 
                         <div class="mb-3">
                             <label for="notes" class="form-label">Notes</label>
-                            <form:textarea path="notes" id="notes" class="form-control" rows="4" />
+                            <form:textarea path="notes" id="notes" class="form-control" rows="4" placeholder="Any notes about this job application..."/>
                             <form:errors path="notes" class="text-danger" />
                         </div>
 
