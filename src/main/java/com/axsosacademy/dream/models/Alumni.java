@@ -20,6 +20,8 @@ public class Alumni extends User {
     
     @OneToMany(mappedBy="owner", fetch=FetchType.LAZY)
 	private List<Task> tasks;
+    
+    private boolean changedDefaultPassword = false;
 
     public Alumni(String email, String password, String firstName, String lastName) {
         super(email, password, firstName, lastName);
@@ -39,6 +41,14 @@ public class Alumni extends User {
 
 	public void setTasks(List<Task> tasks) {
 		this.tasks = tasks;
+	}
+
+	public boolean isChangedDefaultPassword() {
+		return changedDefaultPassword;
+	}
+
+	public void setChangedDefaultPassword(boolean changedDefaultPassword) {
+		this.changedDefaultPassword = changedDefaultPassword;
 	}
 
 }

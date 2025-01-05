@@ -12,11 +12,17 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import com.axsosacademy.dream.models.Alumni;
+import com.axsosacademy.dream.models.AlumniPasswordForm;
 import com.axsosacademy.dream.models.JobApplication;
 import com.axsosacademy.dream.models.Task;
+import com.axsosacademy.dream.models.User;
+import com.axsosacademy.dream.services.AlumniService;
 import com.axsosacademy.dream.services.JobApplicationService;
 import com.axsosacademy.dream.services.TaskService;
+import com.axsosacademy.dream.services.UserService;
 
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -29,6 +35,12 @@ public class AlumniController {
 	
 	@Autowired
 	JobApplicationService jobApplicationService;
+	
+	@Autowired
+	UserService userService;
+	
+	@Autowired
+	AlumniService alumniService;
 
     @GetMapping("/alumni/dashboard")
     public String alumniDashboard(HttpSession session, Model model) {
@@ -89,6 +101,49 @@ public class AlumniController {
         }
         jobApplicationService.deleteJobApplication(id);
         return "redirect:/alumni/dashboard";
+    }
+	
+	@PostMapping("/alumni/dashboard/password/update/{id}")
+    public String updatePassword(@ModelAttribute("passwordForm") AlumniPasswordForm passwordForm, @PathVariable Long id,
+                               BindingResult result, HttpSession session, Model model, RedirectAttributes redirectAttributes) {
+        User userToEdit = (User) userService.findById(id);
+        
+        if (!userService.checkPassword(userToEdit.getId(), passwordForm.getCurrentPassword())) {
+            result.rejectValue("currentPassword", "Invalid", "Current password is incorrect");
+        }
+        
+        // Check if new password matches confirmation
+        if (!passwordForm.getNewPassword().equals(passwordForm.getConfirmPassword())) {
+            result.rejectValue("confirmPassword", "Matches", "New passwords do not match");
+        }
+        if (passwordForm.getNewPassword().isEmpty()) {
+            result.rejectValue("newPassword", "Matches", "New password is required.");
+        }
+        
+        if (result.hasErrors()) {
+            return "change_alumni_password.jsp";
+        }
+
+        // Update password
+        try {
+            userService.updatePassword(id, passwordForm.getNewPassword());
+            alumniService.setFlagForDefaultPasswordChange(id);
+            redirectAttributes.addFlashAttribute("successMessage", "Password updated successfully!");
+            session.setAttribute("loggedUser", alumniService.findById(id));
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Failed to update password. Please try again.");
+        }
+        
+        return "redirect:/alumni/dashboard";
+    }
+	
+	@GetMapping("/alumni/dashboard/password/change")
+    public String viewChangePassword(Model model, HttpSession session) {
+		if (session.getAttribute("loggedUser") == null || !(session.getAttribute("loggedUser") instanceof Alumni)) {
+            return "redirect:/";
+        }
+        model.addAttribute("passwordForm", new AlumniPasswordForm());
+        return "change_alumni_password.jsp";
     }
 	
 	@GetMapping("/alumni/dashboard/jobApplication/edit/{id}")

@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Alumni Profile | DreamTracker</title>
+    <title>Change Password | DreamTracker</title>
     <link rel="icon" href="https://i.ibb.co/3NLmf1N/image-2024-12-31-193140352.png" type="image/icon type">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -195,7 +195,7 @@
 <body>
     <nav class="navbar">
         <div class="container d-flex justify-content-between align-items-center">
-            <a href="/admin/dashboard"><div class="logo-placeholder bg-white">
+            <a href="/alumni/dashboard"><div class="logo-placeholder bg-white">
             <img src="https://i.ibb.co/kSSZV8j/image-2024-12-31-123153782.png"
                  alt="AXSOS Academy Logo"
                  style="max-width: 100%; height: auto;">
@@ -205,7 +205,7 @@
         </div></a>
             <div class="d-flex align-items-center">
                 <div class="nav-buttons">
-                    <a href="/admin/dashboard" class="btn btn-secondary">Back to Dashboard</a>
+                    <a href="/alumni/dashboard" class="btn btn-secondary">Back to Dashboard</a>
                 </div>
                 <a href="/logout" class="btn btn-outline-light ms-3">Logout</a>
             </div>
@@ -213,39 +213,16 @@
     </nav>
     <div class="main-content">
         <div class="container">
-            <div class="card">
-                <div class="card-body">
-                    <h2 class="page-title">Edit Alumni Profile</h2>
-                    
-                    <form:form action="/admin/dashboard/alumnis/edit/${user.id}" method="post" modelAttribute="profileForm">
-                        <div class="mb-4">
-                            <form:label path="firstName" cssClass="form-label">First Name:</form:label>
-                            <form:input path="firstName" class="form-control" value="${user.firstName}" />
-                            <form:errors path="firstName" cssClass="text-danger" />
-                        </div>
-
-                        <div class="mb-4">
-                            <form:label path="lastName" cssClass="form-label">Last Name:</form:label>
-                            <form:input path="lastName" class="form-control" value="${user.lastName}" />
-                            <form:errors path="lastName" cssClass="text-danger" />
-                        </div>
-
-                        <div class="mb-4">
-                            <form:label path="email" cssClass="form-label">Email:</form:label>
-                            <form:input path="email" class="form-control" value="${user.email}" />
-                            <form:errors path="email" cssClass="text-danger" />
-                        </div>
-
-                        <button type="submit" class="btn btn-primary">Save Changes</button>
-                    </form:form>
-                </div>
-            </div>
-
             <div class="card mt-4">
                 <div class="card-body">
                     <h2 class="page-title">Change Password</h2>
                     
-                    <form:form action="/admin/dashboard/password/update/${user.id}" method="post" modelAttribute="passwordForm">
+                    <form:form action="/alumni/dashboard/password/update/${loggedUser.id}" method="post" modelAttribute="passwordForm">
+                        <div class="mb-4">
+                            <form:label path="currentPassword" cssClass="form-label">Current Password:</form:label>
+                            <form:password path="currentPassword" class="form-control" />
+                            <form:errors path="currentPassword" cssClass="text-danger" />
+                        </div>
                         <div class="mb-4">
                             <form:label path="newPassword" cssClass="form-label">New Password:</form:label>
                             <form:password path="newPassword" class="form-control" />

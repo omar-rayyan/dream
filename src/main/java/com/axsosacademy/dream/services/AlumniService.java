@@ -24,6 +24,12 @@ public class AlumniService {
         alumniRepository.deleteById(id);
     }
     
+    public void setFlagForDefaultPasswordChange(Long id) {
+    	Alumni alumni = findById(id);
+    	alumni.setChangedDefaultPassword(true);
+    	alumniRepository.save(alumni);
+    }
+    
     public Alumni findById(Long id) {
     	Optional<Alumni> optionalAlumni = alumniRepository.findById(id);
         if(optionalAlumni.isPresent()) {
